@@ -1,0 +1,117 @@
+#include <iostream>
+using namespace std;
+
+struct Nodo {
+    int dato;
+    Nodo* siguiente;
+};
+
+void insertarLista(Nodo *&lista, int n) {
+    Nodo* nuevo_nodo = new Nodo();
+    //asignar n al nuevo nodo
+    nuevo_nodo->dato = n;
+
+    Nodo* aux1 = lista;
+    //para ordenar lista
+    Nodo* aux2 = NULL;
+
+    while ((aux1 != NULL) && (aux1->dato < n)) {
+        aux2 = aux1;
+        aux1 = aux1->siguiente;
+
+    }
+    //va al principio
+
+    if (lista == aux1) {
+
+        lista = nuevo_nodo;
+    }
+    else {
+        aux2->siguiente = nuevo_nodo;
+    }
+
+    nuevo_nodo->siguiente = aux1;
+
+    cout << "\t Elemento " << n << " insertado a la lista correctamente \n\n";
+}
+
+void mostrarLista(Nodo* lista) {
+
+    Nodo* actual = new Nodo();
+    actual = lista;
+
+    while (actual != NULL) {
+
+        cout << actual->dato << " ->";
+        actual = actual->siguiente;
+    }
+  cout << endl;
+}
+
+void buscar_pares_impares(Nodo* lista)
+{
+  Nodo* actual = new Nodo();
+  actual = lista;
+
+  while (actual != NULL )
+    {
+      if (actual->dato % 2 == 0)
+      {
+        cout << "El " << actual->dato << " es par" << endl;
+      }
+      else
+      {
+        cout << "El " << actual->dato << " es impar" << endl;
+      }
+      actual = actual->siguiente;
+    }
+}
+
+void operaciones_basicas(Nodo* lista)
+{
+  Nodo* actual = new Nodo();
+  actual = lista;
+  int suma = 0, multiplicacion = 1;
+  double resta = 0, division = 0;
+  while (actual != NULL)
+    {
+      suma = actual->dato + suma;
+      resta = actual->dato - resta;
+      multiplicacion = actual->dato * multiplicacion;
+      division = actual-> dato + division;
+      actual = actual->siguiente;
+    }
+  cout << "Suma: " << suma << endl;
+  cout << "Resta: " << resta << endl;
+  cout << "Multiplicacion: " << multiplicacion << endl;
+  cout << "Division: " << division/3 << endl;
+}
+
+int main()
+{
+    Nodo* lista = NULL;
+    int dato;
+
+    cout << "Digite un numero 1: ";
+    cin >> dato;
+    insertarLista(lista, dato);
+
+    cout << "Digite un numero 2: ";
+    cin >> dato;
+    insertarLista(lista, dato);
+
+    cout << "Digite un numero 3: ";
+    cin >> dato;
+    insertarLista(lista, dato);
+
+    cout << "\n\nMostrando los datos de la lista\n";
+    cout << "--------------------------------\n\n";
+
+    mostrarLista(lista);
+
+    buscar_pares_impares(lista);
+
+    operaciones_basicas(lista);
+
+    return 0;
+}
